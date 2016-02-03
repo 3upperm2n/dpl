@@ -1,0 +1,231 @@
+CUDNN.H
+
+//------------------------------------------------------------------//
+// data allocation
+//------------------------------------------------------------------//
+cudnnStatus_t CUDNNWINAPI cudnnCreate(cudnnHandle_t *handle);                   
+cudnnStatus_t CUDNNWINAPI cudnnDestroy(cudnnHandle_t handle);                   
+cudnnStatus_t CUDNNWINAPI cudnnSetStream(cudnnHandle_t handle, cudaStream_t streamId);
+cudnnStatus_t CUDNNWINAPI cudnnGetStream(cudnnHandle_t handle, cudaStream_t *streamId);
+
+
+/* Data structures to represent Image/Filter and the Neural Network Layer */    
+typedef struct cudnnTensorStruct*        cudnnTensorDescriptor_t;               
+typedef struct cudnnConvolutionStruct*   cudnnConvolutionDescriptor_t;          
+typedef struct cudnnPoolingStruct*       cudnnPoolingDescriptor_t;              
+typedef struct cudnnFilterStruct*        cudnnFilterDescriptor_t;               
+typedef struct cudnnLRNStruct*           cudnnLRNDescriptor_t;  
+
+cudnnSetTensor4dDescriptor()
+cudnnSetTensor4dDescriptorEx()
+cudnnGetTensor4dDescriptor()
+cudnnSetTensorNdDescriptor()
+cudnnGetTensorNdDescriptor()
+
+cudnnDestroyTensorDescriptor()
+
+/* Tensor layout conversion helper (dest = alpha * src + beta * dest) */        
+cudnnStatus_t CUDNNWINAPI cudnnTransformTensor(   cudnnHandle_t                    handle,
+                                                  const void                      *alpha,
+                                                  const cudnnTensorDescriptor_t    srcDesc,
+                                                  const void                      *srcData,
+                                                  const void                      *beta,
+                                                  const cudnnTensorDescriptor_t    destDesc,
+                                                  void                            *destData
+                                                );      
+
+
+cudnnAddTensor()
+cudnnAddTensor_v3()
+cudnnSetTensor()
+cudnnScaleTensor()
+
+
+//------------------------------------------------------------------//
+// convolution
+//------------------------------------------------------------------//
+
+/*                                                                              
+ *  convolution mode                                                            
+ */                                                                             
+typedef enum                                                                    
+{                                                                               
+    CUDNN_CONVOLUTION       = 0,                                                
+    CUDNN_CROSS_CORRELATION = 1                                                 
+} cudnnConvolutionMode_t;                                                       
+            
+/* Create an instance of FilterStruct */   
+cudnnCreateFilterDescriptor
+cudnnSetFilter4dDescriptor
+cudnnGetFilter4dDescriptor
+cudnnSetFilterNdDescriptor
+cudnnGetFilterNdDescriptor
+cudnnDestroyFilterDescriptor
+
+/* Create an instance of convolution descriptor */
+cudnnCreateConvolutionDescriptor
+cudnnSetConvolution2dDescriptor
+cudnnGetConvolution2dDescriptor
+
+/* Helper function to return the dimensions of the output tensor given a convolution descriptor */
+/* Helper function to return the dimensions of the output tensor given a convolution descriptor */
+/* Destroy an instance of convolution descriptor */ 
+(ommitted here)
+
+
+/* helper function to provide the convolution algo that fit best the requirement */
+typedef enum                                                                    
+{                                                                               
+    CUDNN_CONVOLUTION_FWD_NO_WORKSPACE            = 0,                          
+    CUDNN_CONVOLUTION_FWD_PREFER_FASTEST          = 1,                          
+    CUDNN_CONVOLUTION_FWD_SPECIFY_WORKSPACE_LIMIT = 2,                          
+} cudnnConvolutionFwdPreference_t;    
+
+
+typedef enum                                                                    
+{                                                                               
+    CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_GEMM         = 0,                       
+    CUDNN_CONVOLUTION_FWD_ALGO_IMPLICIT_PRECOMP_GEMM = 1,                       
+    CUDNN_CONVOLUTION_FWD_ALGO_GEMM                  = 2,                       
+    CUDNN_CONVOLUTION_FWD_ALGO_DIRECT                = 3,                       
+    CUDNN_CONVOLUTION_FWD_ALGO_FFT                   = 4                        
+} cudnnConvolutionFwdAlgo_t; 
+
+typedef struct {                                                                
+    cudnnConvolutionFwdAlgo_t algo;                                             
+    cudnnStatus_t status;                                                       
+    float time;                                                                 
+    size_t memory;                                                              
+} cudnnConvolutionFwdAlgoPerf_t;    
+
+
+cudnnFindConvolutionForwardAlgorithm
+cudnnGetConvolutionForwardAlgorithm
+cudnnGetConvolutionForwardWorkspaceSize
+cudnnConvolutionForward
+
+
+
+
+/* Functions to perform the backward multiconvolution */                        
+cudnnStatus_t CUDNNWINAPI cudnnConvolutionBackwardBias(   cudnnHandle_t                   handle,
+                                                          const void                     *alpha,
+                                                          const cudnnTensorDescriptor_t   srcDesc,
+                                                          const void                      *srcData,
+                                                          const void                      *beta,
+                                                          const cudnnTensorDescriptor_t   destDesc,
+                                                          void                           *destData
+                                                      );        
+
+(other related api are omitted here)
+
+
+
+//------------------------------------------------------------------//
+// softmax
+//------------------------------------------------------------------//
+
+/*                                                                              
+ *  softmax algorithm                                                           
+ */                                                                             
+typedef enum                                                                    
+{                                                                               
+    CUDNN_SOFTMAX_FAST     = 0,        /* straightforward implementation */     
+    CUDNN_SOFTMAX_ACCURATE = 1,         /* subtract max from every point to avoid overflow */
+    CUDNN_SOFTMAX_LOG      = 2                                                  
+} cudnnSoftmaxAlgorithm_t;  
+
+
+cudnnSoftmaxForward
+cudnnSoftmaxBackward
+
+
+//------------------------------------------------------------------//
+// pooling
+//------------------------------------------------------------------//
+
+
+/*                                                                              
+ *  pooling mode                                                                
+ */                                                                             
+typedef enum                                                                    
+{                                                                               
+    CUDNN_POOLING_MAX     = 0,                                                  
+    CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING = 1, // count for average includes padded values
+    CUDNN_POOLING_AVERAGE_COUNT_EXCLUDE_PADDING = 2 // count for average does not include padded values
+} cudnnPoolingMode_t;   
+
+cudnnPoolingForward
+cudnnPoolingBackward
+
+
+
+
+
+//------------------------------------------------------------------//
+// activation
+//------------------------------------------------------------------//
+
+/*                                                                              
+ * activation mode                                                              
+ */                                                                             
+typedef enum                                                                    
+{                                                                               
+    CUDNN_ACTIVATION_SIGMOID = 0,                                               
+    CUDNN_ACTIVATION_RELU    = 1,                                               
+    CUDNN_ACTIVATION_TANH    = 2                                                
+} cudnnActivationMode_t;   
+
+cudnnActivationForward
+cudnnActivationBackward
+
+
+
+//------------------------------------------------------------------//
+// LRN
+//------------------------------------------------------------------//
+// Create an instance of LRN (Local Response Normalization) descriptor          
+// This function will set lrnN=5, lrnAlpha=1e-4, lrnBeta=0.75, lrnK=2.0 as defaults from Krizhevsky'12 ImageNet paper
+cudnnStatus_t CUDNNWINAPI cudnnCreateLRNDescriptor( cudnnLRNDescriptor_t* normDesc );
+                                                                                
+#define CUDNN_LRN_MIN_N 1 // minimum allowed lrnN                               
+#define CUDNN_LRN_MAX_N 16 // maximum allowed lrnN                              
+#define CUDNN_LRN_MIN_K 1e-5 // minimum allowed lrnK                            
+#define CUDNN_LRN_MIN_BETA 0.01 // minimum allowed lrnBeta                      
+                                                                                
+// LRN layer mode, currently only cross-channel is supported (across the tensor's dimA[1] dimension)
+typedef enum                                                                    
+{                                                                               
+    CUDNN_LRN_CROSS_CHANNEL_DIM1 = 0,                                           
+} cudnnLRNMode_t;                                                               
+                                                                                
+// LRN uses a window [center-lookBehind, center+lookAhead], where               
+// lookBehind = floor( (lrnN-1)/2 ), lookAhead = lrnN-lookBehind-1.             
+// So for n=10, the window is [k-4...k...k+5] with a total of 10 samples.       
+// Values of double parameters will be cast down to tensor data type.  
+cudnnSetLRNDescriptor
+
+
+
+
+//------------------------------------------------------------------//
+// Local constrast normalization / divisible
+//------------------------------------------------------------------//
+
+typedef enum                                                                    
+{                                                                               
+    CUDNN_DIVNORM_PRECOMPUTED_MEANS = 0,                                        
+} cudnnDivNormMode_t;                                                           
+                                                                                
+// LCN/divisive normalization functions: of the form "output = alpha * normalize(srcData) + beta * destData"
+// srcMeansData can be NULL to reproduce Caffe's LRN within-channel behavior    
+cudnnDivisiveNormalizationForward()
+
+
+
+
+
+
+
+
+
