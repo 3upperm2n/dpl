@@ -1,23 +1,41 @@
-ZhiHu:
+//-------------------------------------------//
+// ZhiHu
+//-------------------------------------------//
 [1] https://www.zhihu.com/question/31785984
 
-Websites:
+
+//-------------------------------------------//
+// Websites
+//-------------------------------------------//
 [1]http://deeplearning.net/2015/09/30/deep-learning-summer-school-2015-videos/
 [2] UFLDL Tutorial
 http://deeplearning.stanford.edu/wiki/index.php/UFLDL_Tutorial
 [3] Deep Learning Libraries by Language
 http://www.teglor.com/b/deep-learning-libraries-language-cm569/
 
-
-Lectures
+//-------------------------------------------//
+// Lectures
+//-------------------------------------------//
 [1] http://videolectures.net/deeplearning2015_montreal/
 
-Classes
+//-------------------------------------------//
+// Classes
+//-------------------------------------------//
 [1]
 [2] CILVR lab @ NYU
 http://cilvr.cs.nyu.edu/doku.php?id=deeplearning:slides:start
 [3] CS231n: Convolutional Neural Networks for Visual Recognition
 http://vision.stanford.edu/teaching/cs231n/syllabus.html
 
-Free Online Books:
+
+//-------------------------------------------//
+// Free Online Books:
+//-------------------------------------------//
 [1]http://neuralnetworksanddeeplearning.com/chap1.html
+
+
+//-------------------------------------------//
+// Others
+//-------------------------------------------//
+[1] 100 Best GitHub: Deep Learning
+http://meta-guide.com/software-meta-guide/100-best-github-deep-learning
