@@ -22,6 +22,9 @@ http://alexminnaar.com/implementing-the-distbelief-deep-neural-network-training-
 // Lectures
 //-------------------------------------------//
 [1] http://videolectures.net/deeplearning2015_montreal/
+[2] http://techtalks.tv/deep_learning_nyu_spring_2014/
+
+
 
 //-------------------------------------------//
 // Classes
@@ -40,7 +43,15 @@ http://vision.stanford.edu/teaching/cs231n/syllabus.html
 
 
 //-------------------------------------------//
+// Theano
+//-------------------------------------------//
+http://deeplearning.net/tutorial/lenet.html
+
+//-------------------------------------------//
 // Others
 //-------------------------------------------//
 [1] 100 Best GitHub: Deep Learning
 http://meta-guide.com/software-meta-guide/100-best-github-deep-learning
+
+[2] nvidia deep learning
+https://developer.nvidia.com/deep-learning-courses
