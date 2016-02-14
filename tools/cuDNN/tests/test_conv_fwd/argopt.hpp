@@ -32,10 +32,16 @@ public:
   int opt;                                                                    
   int option_index;
 
-  int width;
-  int height;
+  struct IMAGE {
+	int width; 
+	int height;
+  } image;
 
-  ARG() { option_index = 0;}
+  ARG() { 
+	option_index = 0;
+	image.width  = -1; 
+	image.height = -1; 
+  }
 
   void read_cmd_line(int argc, char** argv)
   {
@@ -45,8 +51,9 @@ public:
 	  exit(0);                                                                
 	} 		
 
-	while ((opt = getopt_long(argc, argv, "w:h:", full_options, &option_index)) != -1)
-	{                                                                           
+
+	while((opt = getopt_long(argc, argv, "w:h:", full_options, &option_index)) != -1)
+	{
 	  switch(opt)
 	  {
 		case 0:
@@ -59,11 +66,15 @@ public:
 		  break;
 
 		case 'w':
-		  width = atoi(optarg);
+		  if(!optarg){
+			printf("%s\n", optarg);
+			exit(1);
+		  }
+		  image.width = atoi(optarg);
 		  break;
 
 		case 'h':
-		  height = atoi(optarg);
+		  image.height = atoi(optarg);
 		  break;
 
 		case '?':
@@ -73,6 +84,9 @@ public:
 		  abort ();
 	  }
 	}
+
+	if(image.width  == -1) exit(EXIT_FAILURE);
+	if(image.height == -1) exit(EXIT_FAILURE);
   }
 };
 #endif
