@@ -3,28 +3,17 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
-#include <getopt.h>
 
-extern char *optarg;
-extern int optind, opterr, optopt;
+const char short_opt[] = {'w', 'h', 'u', '\0'};
+const char *long_opt[] = {"--width", "--height", "--usage"};
 
-static struct option full_options[] = {
-  { "width",  required_argument, 0, 'w'},
-  { "height", required_argument, 0, 'h'},
-  { 0, 0, 0, 0 }                                                          
-};  
-
-static const char *arg_help =
-"\n"
-"\tfwd_conv [<options>] <sources>\n"                                             
-"\n"                                                                        
-"Options:\n"                                                                
-"\n"                                                                        
-"-w\n"                                                                   
-"\timage width.\n"                                      
-"-h\n"                                                                   
-"\timage height.\n"                                      
-"\n";
+void usage(char *argv)
+{
+  printf("Usage:\n");
+  printf("\t%s opt opt_val\n\n", argv);
+  printf(" -w    (--width)         image_width\n");
+  printf(" -h    (--height)        image_height\n");
+}
 
 class ARG 
 {
@@ -43,50 +32,74 @@ public:
 	image.height = -1; 
   }
 
-  void read_cmd_line(int argc, char** argv)
+  int moreopt(char *argv);
+  int read_opt(int argc, char **argv, int id, void *data, const char *datatype);
+  void parsing(int argc, char **argv);
+};
+
+int ARG::moreopt(char *argv) {
+  int i=0;
+  while(short_opt[i]!='\0'){
+	if(strcmp(argv, long_opt[i])==0){
+	  argv[1]=short_opt[i];
+	  argv[2]='\0';
+	  return 0;
+	}
+	i++;
+  }
+  return 1;
+}
+
+int ARG::read_opt(int argc, char **argv, int id, void *data, const char *datatype)
+{
+  if(strcmp(datatype, "int")==0) {
+	if(id+1 >= argc) {
+	  fprintf(stderr, "incomplete input for %s\n", argv[id]);
+	  usage(argv[0]);
+	  exit(EXIT_FAILURE);
+	}
+	*((int*)data)=atoi(argv[id+1]);
+  }
+  return id+1;
+}
+
+void ARG::parsing(int argc, char **argv)
+{
+  if(argc<=1){
+	usage(argv[0]);
+	exit(EXIT_FAILURE);
+  }
+
+  int i=1;
+  while(i < argc)
   {
-	if (argc == 1)                                                              
-	{                                                                           
-	  printf("%s", arg_help);
-	  exit(0);                                                                
-	} 		
-
-
-	while((opt = getopt_long(argc, argv, "w:h:", full_options, &option_index)) != -1)
+	if(argv[i][0]=='-') 
 	{
-	  switch(opt)
-	  {
-		case 0:
-		  if (full_options[option_index].flag != 0)
-			break;
-		  printf ("option %s", full_options[option_index].name);
-		  if (optarg)
-			printf (" with arg %s", optarg);
-		  printf ("\n");
-		  break;
+	  if(argv[i][1]=='-'){
+		// read long options
+		if(moreopt(argv[i]))
+		  fprintf(stderr,"unknown verbose option : %s\n", argv[i]);
+	  }	
 
+	  // read short options
+	  switch(argv[i][1])
+	  {
+		case 'u':
+		  usage(argv[0]);
+		  exit(EXIT_FAILURE);
+	  
 		case 'w':
-		  if(!optarg){
-			printf("%s\n", optarg);
-			exit(1);
-		  }
-		  image.width = atoi(optarg);
+		   i=read_opt(argc, argv, i, &image.width, "int");
 		  break;
 
 		case 'h':
-		  image.height = atoi(optarg);
+		  i=read_opt(argc, argv, i, &image.height, "int");
 		  break;
-
-		case '?':
-		  break;
-
-		default:
-		  abort ();
 	  }
 	}
-
-	if(image.width  == -1) exit(EXIT_FAILURE);
-	if(image.height == -1) exit(EXIT_FAILURE);
+	i++;
   }
-};
+}
+
+
 #endif
