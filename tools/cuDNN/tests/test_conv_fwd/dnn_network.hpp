@@ -19,13 +19,17 @@ class network_t
 {
   public:
     cudnnDataType_t dataType;
-    cudnnTensorFormat_t tensorFormat;
     cudnnHandle_t cudnnHandle;
-    cudnnTensorDescriptor_t srcTensorDesc, dstTensorDesc, biasTensorDesc;
-    cudnnFilterDescriptor_t filterDesc;
-    cudnnConvolutionDescriptor_t convDesc;
-    cudnnPoolingDescriptor_t poolingDesc;
     cublasHandle_t cublasHandle;
+    cudnnTensorFormat_t tensorFormat;
+	// tensors
+    cudnnTensorDescriptor_t srcTensorDesc, dstTensorDesc, biasTensorDesc;
+	// filter
+    cudnnFilterDescriptor_t filterDesc;
+	// conv
+    cudnnConvolutionDescriptor_t convDesc;
+	// pooling
+    cudnnPoolingDescriptor_t poolingDesc;
 
     void createHandles();
     void destroyHandles();
@@ -48,6 +52,9 @@ class network_t
             checkCudaErrors( cudaFree(*data_d) );
         checkCudaErrors( cudaMalloc(data_d, size*sizeof(float)) );
     }
+
+	void addBias(const cudnnTensorDescriptor_t& dstTensorDesc, 
+		const Layer_t& layer, int c, float *data);
 
 	void convForward(const Layer_t& conv,
 			  int& n,	// batch size 
@@ -396,14 +403,34 @@ void network_t::convForward(const Layer_t& conv,
 		&beta,				// 
 		dstTensorDesc,		// dest tensor descriptor
 		*dstData) );		// dest tensor
-  /*
-	 addBias(dstTensorDesc, conv, c, *dstData);
-	 if (sizeInBytes!=0)
-	 {
-	 checkCudaErrors( cudaFree(workSpace) );
-	 }
-	 */
+
+  // add bias
+  addBias(dstTensorDesc, conv, c, *dstData);
+
+  if (sizeInBytes!=0)
+  {
+	checkCudaErrors( cudaFree(workSpace) );
+  }
 }
 
+void network_t::addBias(const cudnnTensorDescriptor_t& dstTensorDesc, 
+	const Layer_t& layer, int c, float *data)
+{
+  checkCUDNN( cudnnSetTensor4dDescriptor(biasTensorDesc,
+		tensorFormat,
+		dataType,
+		1, c,
+		1,
+		1) );
+
+  float alpha = float(1);
+  float beta  = float(1);
+  checkCUDNN( cudnnAddTensor(cudnnHandle, CUDNN_ADD_SAME_C,
+		&alpha, biasTensorDesc,
+		layer.bias_d,
+		&beta,
+		dstTensorDesc,
+		data) );
+}
 
 #endif
