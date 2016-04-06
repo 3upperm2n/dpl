@@ -5,6 +5,15 @@ https://github.com/roseperrone/video-object-detection
 http://pjreddie.com/darknet/yolo/
 https://github.com/Russell91/reinspect
 
+//-------------------------------------------//
+// opencv
+//-------------------------------------------//
+Load Caffe framework models
+  http://docs.opencv.org/3.1.0/d5/de7/tutorial_dnn_googlenet.html#gsc.tab=0
+
+Getting Started with Videos
+http://opencv-python-tutroals.readthedocs.org/en/latest/py_tutorials/py_gui/py_video_display/py_video_display.html
+
 
 //-------------------------------------------//
 // ZhiHu
