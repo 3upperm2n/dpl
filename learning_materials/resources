@@ -73,6 +73,11 @@ http://vision.stanford.edu/teaching/cs231n/syllabus.html
 http://deeplearning.net/tutorial/lenet.html
 
 //-------------------------------------------//
+// Torch
+//-------------------------------------------//
+https://github.com/torch/torch7
+
+//-------------------------------------------//
 // DeepLearning4J
 //-------------------------------------------//
 http://deeplearning4j.org/compare-dl4j-torch7-pylearn.html
