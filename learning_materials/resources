@@ -16,6 +16,8 @@ http://opencv-python-tutroals.readthedocs.org/en/latest/py_tutorials/py_gui/py_v
 
 https://github.com/Itseez/opencv_contrib
 
+AI Shack tutorial
+http://aishack.in/tutorials/
 
 //-------------------------------------------//
 // ZhiHu
@@ -96,3 +98,6 @@ http://courses.cs.tau.ac.il/Caffe_workshop/
 
 [5] compare frameworks
 https://www.microway.com/hpc-tech-tips/deep-learning-frameworks-survey-tensorflow-torch-theano-caffe-neon-ibm-machine-learning-stack/
+
+[6] Deep Belief SDK
+https://github.com/jetpacapp/DeepBeliefSDK/tree/master#getting-started-on-linux
