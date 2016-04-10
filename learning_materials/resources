@@ -1,4 +1,9 @@
 //--------------------------------------------//
+// nvidia
+//--------------------------------------------//
+https://developer.nvidia.com/deep-learning-resources
+
+//--------------------------------------------//
 // video related
 //--------------------------------------------//
 https://github.com/roseperrone/video-object-detection
@@ -54,10 +59,9 @@ http://acsweb.ucsd.edu/~stripath/research/project.html
 //-------------------------------------------//
 // Classes
 //-------------------------------------------//
-[1]
-[2] CILVR lab @ NYU
+[1] CILVR lab @ NYU
 http://cilvr.cs.nyu.edu/doku.php?id=deeplearning:slides:start
-[3] CS231n: Convolutional Neural Networks for Visual Recognition
+[2] CS231n: Convolutional Neural Networks for Visual Recognition
 http://vision.stanford.edu/teaching/cs231n/syllabus.html
 
 
