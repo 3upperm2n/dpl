@@ -1,3 +1,29 @@
+//--------------------------------------------//
+// nvidia
+//--------------------------------------------//
+https://developer.nvidia.com/deep-learning-resources
+
+//--------------------------------------------//
+// video related
+//--------------------------------------------//
+https://github.com/roseperrone/video-object-detection
+http://pjreddie.com/darknet/yolo/
+https://github.com/Russell91/reinspect
+
+//-------------------------------------------//
+// opencv
+//-------------------------------------------//
+Load Caffe framework models
+  http://docs.opencv.org/3.1.0/d5/de7/tutorial_dnn_googlenet.html#gsc.tab=0
+
+Getting Started with Videos
+http://opencv-python-tutroals.readthedocs.org/en/latest/py_tutorials/py_gui/py_video_display/py_video_display.html
+
+https://github.com/Itseez/opencv_contrib
+
+AI Shack tutorial
+http://aishack.in/tutorials/
+
 //-------------------------------------------//
 // ZhiHu
 //-------------------------------------------//
@@ -18,6 +44,10 @@ http://www.teglor.com/b/deep-learning-libraries-language-cm569/
 //-------------------------------------------//
 http://alexminnaar.com/implementing-the-distbelief-deep-neural-network-training-framework-with-akka.html
 
+Subarna Tripathi
+http://acsweb.ucsd.edu/~stripath/research/project.html
+
+
 //-------------------------------------------//
 // Lectures
 //-------------------------------------------//
@@ -29,10 +59,9 @@ http://alexminnaar.com/implementing-the-distbelief-deep-neural-network-training-
 //-------------------------------------------//
 // Classes
 //-------------------------------------------//
-[1]
-[2] CILVR lab @ NYU
+[1] CILVR lab @ NYU
 http://cilvr.cs.nyu.edu/doku.php?id=deeplearning:slides:start
-[3] CS231n: Convolutional Neural Networks for Visual Recognition
+[2] CS231n: Convolutional Neural Networks for Visual Recognition
 http://vision.stanford.edu/teaching/cs231n/syllabus.html
 
 
@@ -48,6 +77,11 @@ http://vision.stanford.edu/teaching/cs231n/syllabus.html
 http://deeplearning.net/tutorial/lenet.html
 
 //-------------------------------------------//
+// Torch
+//-------------------------------------------//
+https://github.com/torch/torch7
+
+//-------------------------------------------//
 // DeepLearning4J
 //-------------------------------------------//
 http://deeplearning4j.org/compare-dl4j-torch7-pylearn.html
@@ -61,3 +95,18 @@ http://meta-guide.com/software-meta-guide/100-best-github-deep-learning
 
 [2] nvidia deep learning
 https://developer.nvidia.com/deep-learning-courses
+
+[3] A list of python software for deep learning
+http://www.aidanf.net/posts/a-list-of-python-software-for-deep-learning
+
+[3] C#
+https://visualstudiomagazine.com/articles/2015/04/01/back-propagation-using-c.aspx
+
+[4]caffe_workshop by Boris Ginzburg (intel -> nvidia)
+http://courses.cs.tau.ac.il/Caffe_workshop/
+
+[5] compare frameworks
+https://www.microway.com/hpc-tech-tips/deep-learning-frameworks-survey-tensorflow-torch-theano-caffe-neon-ibm-machine-learning-stack/
+
+[6] Deep Belief SDK
+https://github.com/jetpacapp/DeepBeliefSDK/tree/master#getting-started-on-linux
